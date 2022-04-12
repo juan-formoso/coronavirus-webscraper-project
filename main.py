@@ -1,10 +1,13 @@
 import requests
 import json
-import dotenv
+import os
+from dotenv import load_dotenv
 
-API_KEY = process.env.API_KEY
-PROJECT_TOKEN = process.env.PROJECT_TOKEN
-RUN_TOKEN = process.env.RUN_TOKEN
+load_dotenv()
+
+API_KEY = os.getenv("API_KEY")
+PROJECT_TOKEN = os.getenv("PROJECT_TOKEN")
+RUN_TOKEN = os.getenv("RUN_TOKEN")
 
 class Data:
   def __init__(self, api_key, project_token):
