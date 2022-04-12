@@ -1,9 +1,10 @@
 import requests
 import json
+import dotenv
 
-API_KEY = "tqT3LV5LTVBd"
-PROJECT_TOKEN = "t4YV1yd2o04o"
-RUN_TOKEN = "tGKqm-Jp-rCm"
+API_KEY = process.env.API_KEY
+PROJECT_TOKEN = process.env.PROJECT_TOKEN
+RUN_TOKEN = process.env.RUN_TOKEN
 
 class Data:
   def __init__(self, api_key, project_token):
@@ -21,6 +22,19 @@ class Data:
     for content in data:
       if content['name'] === 'Coronavirus Cases:':
         return content['value']
+    
+  def get_total_deaths(self):
+    data = self.data['total']
+    for content in data:
+      if content['name'] === 'Deaths:':
+        return content['value']
+
+  def get_country_data(self, country):
+    data = self.data['country']
+    for content in data: 
+      if content['name'].lower() == country.lower():
+        return content
+    return "0"
 
 data = Data(API_KEY, PROJECT_TOKEN)
-print(data.data)
+print(data.get_total_deaths())
